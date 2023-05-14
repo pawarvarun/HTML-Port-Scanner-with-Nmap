@@ -1,4 +1,4 @@
-# Port-Scanner-Output
+# HTML Port Scanner with Nmap
 
 The HTML Port Scanner with Nmap is a C++ program designed to scan open ports and services of a given domain or IP address using Nmap, a powerful and versatile network scanning tool. The program provides a user-friendly interface that accepts a domain or IP address as input and generates an HTML page containing the scan results in a formatted and easily readable form.
 
