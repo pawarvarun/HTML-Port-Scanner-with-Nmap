@@ -6,6 +6,7 @@ string data_port[100];
 string data_state[100];
 string data_service[100];
 string data_version[100];
+string data_tip[100];
 
 struct
 {
