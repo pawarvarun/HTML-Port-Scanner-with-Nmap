@@ -244,7 +244,7 @@ int main()
 
 				reset();
 				helper(i);
-				cout << i << ". " << data_port[i] << endl << data_state[i] << endl << data_service[i] << endl << data_version[i] << endl << data_tip[i] << endl << endl;
+				//cout << i << ". " << data_port[i] << endl << data_state[i] << endl << data_service[i] << endl << data_version[i] << endl << data_tip[i] << endl << endl;
 				i++;
 			}
 		}
