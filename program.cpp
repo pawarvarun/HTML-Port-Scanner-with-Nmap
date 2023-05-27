@@ -17,6 +17,41 @@ struct
 
 port, state, service, version;
 
+bool isNmapInstalled()
+{
+	FILE *pipe = popen("which nmap", "r");
+	if (pipe)
+	{
+		char buffer[128];
+		string result = "";
+		while (!feof(pipe))
+		{
+			if (fgets(buffer, 128, pipe) != nullptr)
+				result += buffer;
+		}
+
+		pclose(pipe);
+		return !result.empty();
+	}
+
+	return false;
+}
+
+void command()
+{
+	if (!isNmapInstalled())
+	{
+		cout << "nmap is not installed on your system." << endl;
+	}
+
+	string hostname;
+	cout << "Enter hostname or IP: ";
+	cin >> hostname;
+
+	string command = "nmap -sV " + hostname + " > /tmp/tempoutput.txt";
+	system(command.c_str());
+}
+
 string rtrim(const std::string &s)
 {
 	size_t end = s.find_last_not_of(" ");
@@ -133,7 +168,7 @@ void helper(int i)
 	{
 		data_tip[i] = "1) Capturing NTLM hashes\n2) Brute-forcing SMB login credentials\n3) Anonymous login in smbclient";
 	}
-	else if (data_service[i] == "unknown")
+	else	//if (data_service[i] == "unknown") 
 	{
 		data_tip[i] = "Try Googling about it.";
 	}
@@ -144,7 +179,8 @@ void helper(int i)
 
 int main()
 {
-	ifstream inputfile("sample.txt");
+	command();
+	ifstream inputfile("/tmp/tempoutput.txt");
 	string line;
 
 	int count = 0;
@@ -160,7 +196,7 @@ int main()
 			//uncomment this to print word indexes
 			//cout<<port.init_pos<<endl<<port.final_pos<<endl<<state.init_pos<<endl<<state.final_pos<<endl<<service.init_pos<<endl<<service.final_pos<<endl<<version.init_pos<<endl<<version.final_pos;
 		}
-		else if (fin("incorrect", line))
+		else if (fin("incorrect", line) || fin("Info", line))
 		{
 			//used to break once port details part completed
 			count = 0;
@@ -208,7 +244,7 @@ int main()
 
 				reset();
 				helper(i);
-				//cout<<i<<". "<<data_port[i]<<endl<<data_state[i]<<endl<<data_service[i]<<endl<<data_version[i]<<endl<<data_tip[i]<<endl<<endl;
+				cout << i << ". " << data_port[i] << endl << data_state[i] << endl << data_service[i] << endl << data_version[i] << endl << data_tip[i] << endl << endl;
 				i++;
 			}
 		}
