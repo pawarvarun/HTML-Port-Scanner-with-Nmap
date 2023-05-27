@@ -17,6 +17,12 @@ struct
 
 port, state, service, version;
 
+string rtrim(const std::string &s)
+{
+	size_t end = s.find_last_not_of(" ");
+	return (end == string::npos) ? "" : s.substr(0, end + 1);
+}
+
 //function to remove extra whitespace at the end
 string space_remover(string input1)
 {
@@ -105,6 +111,37 @@ int space(string line)
 	}
 }
 
+void helper(int i)
+{
+	if (data_service[i] == "ftp")
+	{
+		data_tip[i] = "1) Check for anonymous login\n2) brute forcing passwords\n3) Directory traversal attacks";
+	}
+	else if (data_service[i] == "ssh")
+	{
+		data_tip[i] = "1) Leaked ssh keys\n2) brute forcing credential details";
+	}
+	else if (data_service[i] == "http" || data_service[i] == "ssl/http")
+	{
+		data_tip[i] = "1) Cross-site Scripting\n2) SQL Injections\n3) Gobuster\n4) Fuzzing\n5) Viewing page Source\n6) Modifying Requests";
+	}
+	else if (data_service[i] == "telnet")
+	{
+		data_tip[i] = "1) Session Hijacking\n2) Remote Code Execution\n3) Man-in-the-Middle (MITM)";
+	}
+	else if (data_service[i] == "smb")
+	{
+		data_tip[i] = "1) Capturing NTLM hashes\n2) Brute-forcing SMB login credentials\n3) Anonymous login in smbclient";
+	}
+	else if (data_service[i] == "unknown")
+	{
+		data_tip[i] = "Try Googling about it.";
+	}
+
+	//cout<<i<<". "<<data_tip[i]<<endl<<data_service[i]<<"."<<endl<<endl;
+
+}
+
 int main()
 {
 	ifstream inputfile("sample.txt");
@@ -112,9 +149,9 @@ int main()
 
 	int count = 0;
 	string str = "";
+	int i = 0;
 	while (getline(inputfile, line))
 	{
-		int i = 0;
 		if (fin("PORT", line))
 		{
 			count++;
@@ -164,15 +201,16 @@ int main()
 					}
 				}
 
-				data_port[i] = port.data;
-				data_state[i] = state.data;
-				data_service[i] = service.data;
-				data_version[i] = version.data;
-				//cout<<data_port[i]<<endl<<data_state[i]<<endl<<data_service[i]<<endl<<data_version[i]<<endl<<endl;
+				data_port[i] = rtrim(port.data);
+				data_state[i] = rtrim(state.data);
+				data_service[i] = rtrim(service.data);
+				data_version[i] = rtrim(version.data);
+
 				reset();
+				helper(i);
+				//cout<<i<<". "<<data_port[i]<<endl<<data_state[i]<<endl<<data_service[i]<<endl<<data_version[i]<<endl<<data_tip[i]<<endl<<endl;
+				i++;
 			}
 		}
-
-		i++;
 	}
 }
