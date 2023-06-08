@@ -18,7 +18,7 @@ struct
 port, state, service, version;
 
 void asciiart(){
-	//non
+	
 	cout<< R"(
 
 __________              __      _________                                         
@@ -68,6 +68,7 @@ void command()
 	cout<<"\nTarget Scanned!\nGenerating Output file.\n";
 }
 
+//DO IT
 string rtrim(const std::string &s)
 {
 	size_t end = s.find_last_not_of(" ");
