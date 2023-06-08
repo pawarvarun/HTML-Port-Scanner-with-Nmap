@@ -76,23 +76,7 @@ string rtrim(const std::string &s)
 }
 
 //function to remove extra whitespace at the end
-string space_remover(string input1)
-{
-	string input = input1;
-	while (0)
-	{
-		int len = input.length() - 1;
-		if (input[len] == ' ')
-		{
-			input = input.substr(0, len - 1);
-		}
-		else
-		{
-			break;
-		}
-	}
-	return input;
-}
+
 
 //function to reset values
 void reset()
@@ -359,25 +343,25 @@ void data_manage(){
 					if (j >= port.init_pos && j <= port.final_pos)
 					{
 						port.data = port.data + (line.at(j));
-						port.data = space_remover(port.data);
+						//port.data = space_remover(port.data);
 					}
 
 					if (j >= state.init_pos && j <= state.final_pos)
 					{
 						state.data = state.data + (line.at(j));
-						state.data = space_remover(state.data);
+						//state.data = space_remover(state.data);
 					}
 
 					if (j >= service.init_pos && j <= service.final_pos)
 					{
 						service.data = service.data + (line.at(j));
-						service.data = space_remover(service.data);
+						//service.data = space_remover(service.data);
 					}
 
 					if (j >= version.init_pos && j <= len)
 					{
 						version.data = version.data + (line.at(j));
-						version.data = space_remover(version.data);
+						//version.data = space_remover(version.data);
 					}
 				}
 
