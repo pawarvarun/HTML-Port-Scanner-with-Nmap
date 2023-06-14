@@ -55,6 +55,7 @@ void command()
 	if (!isNmapInstalled())
 	{
 		cout << "nmap is not installed on your system." << endl;
+		exit(0);
 	}
 
 	string hostname;
