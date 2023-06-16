@@ -72,7 +72,7 @@ void command()
 //DO IT
 string rtrim(const std::string &s)
 {
-	size_t end = s.find_last_not_of(" ");
+	int end = s.find_last_not_of(" ");
 	return (end == string::npos) ? "" : s.substr(0, end + 1);
 }
 
