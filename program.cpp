@@ -197,13 +197,13 @@ void helper(int i)
 
  int outputfile() {
     int i;
-    FILE *file;
+   /* FILE *file;
     file = fopen("report.txt", "w");
     
     if (file == NULL) {
         printf("Unable to create the file.\n");
         return 1;
-    }
+    }*/
        ofstream htmlFile("Network_report.html");
     if (!htmlFile) {
         cout << "Failed to create HTML file." << endl;
