@@ -305,7 +305,7 @@ htmlFile << R"(</tbody>
     return 0;
 
     
-    fclose(file); 
+    //fclose(file); 
 }
 
 void data_manage(){
